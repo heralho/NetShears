@@ -82,10 +82,10 @@ public final class NetShears: NSObject {
         return config.removeModifier(at: index)
     }
 
-    public func presentNetworkMonitor() {
+    public func presentNetworkMonitor(presentationStyle: UIModalPresentationStyle = .fullScreen) {
         let storyboard = UIStoryboard.NetShearsStoryBoard
         if let initialVC = storyboard.instantiateInitialViewController(){
-            initialVC.modalPresentationStyle = .fullScreen
+            initialVC.modalPresentationStyle = presentationStyle
             ((initialVC as? UINavigationController)?.topViewController as? RequestsViewController)?.delegate = bodyExportDelegate
             UIViewController.currentViewController()?.present(initialVC, animated: true, completion: nil)
         }
