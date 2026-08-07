@@ -50,7 +50,9 @@ final class BodyDetailViewController: UIViewController, ShowLoaderProtocol {
         super.viewWillAppear(animated)
         let hud = showLoader(view: view)
         RequestExporter.body(data, bodyExportType: bodyExportType ) { [weak self] (stringData) in
-            let formattedJSON = stringData
+            /// try to decrypt
+            let decrypted = NetShears.shared.decryptor.decrpyt(stringData)
+            let formattedJSON = decrypted
             DispatchQueue.main.async {
                 self?.textView.text = formattedJSON
                 self?.hideLoader(loaderView: hud)

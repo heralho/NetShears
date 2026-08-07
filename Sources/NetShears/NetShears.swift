@@ -28,6 +28,7 @@ public final class NetShears: NSObject {
     let networkRequestInterceptor = NetworkRequestInterceptor()
 
     public var ignore: Ignore = .disbaled
+    public var decryptor: DecryptorInterface = Decryptor()
 
     lazy var config: NetworkInterceptorConfig = {
         var savedModifiers = [Modifier]().retrieveFromDisk()
@@ -109,5 +110,9 @@ public final class NetShears: NSObject {
         if listenerEnable {
             RequestBroadcast.shared.newRequestArrived(request)
         }
+    }
+    
+    public func setDecryptor(_ decryptor: DecryptorInterface) {
+        self.decryptor = decryptor
     }
 }
